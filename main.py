@@ -15,7 +15,7 @@ def main() -> None:
     step_size: int = 2000
 
     #file_path: str = input("Enter file name: ")
-    file_path = '344717_RED.csv'
+    file_path: str = '344717_RED.csv'
     
     df: pd.DataFrame = read_csv_file(file_path)
    
