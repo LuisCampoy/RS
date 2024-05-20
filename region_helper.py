@@ -5,23 +5,23 @@
 import pandas as pd
 
 # calculate maximum absolute value within the ROI in X, Y and Z axis
-def get_region(four_columns, regions_of_interest, window_size, step_size):
+def get_region(df, regions_of_interest, window_size, step_size):
      
     for k in range(len(regions_of_interest)):    
-        print("ROI ",
+        print('ROI ',
             k + 1,
-            ": (",
-            four_columns["Shimmer_4DA1_TimestampSync_FormattedUnix_CAL"][
+            ': (',
+            df['TimeStamp'][
                 regions_of_interest[k][0] * step_size
             ],
-            ",",
-            four_columns["Shimmer_4DA1_TimestampSync_FormattedUnix_CAL"][
+            ',',
+            df['TimeStamp'][
                 regions_of_interest[k][0] * step_size + window_size
             ],
-            ")",
+            ')',
         )
 
-def get_max_abs_value(four_columns, regions_of_interest, window_size, step_size):
+def get_max_abs_value(df, regions_of_interest, window_size, step_size):
     ''' Create a new pd.DataFrafe with the 3 columns (X, Y, Z) and region of interest
 
     Args:
@@ -34,7 +34,7 @@ def get_max_abs_value(four_columns, regions_of_interest, window_size, step_size)
    
     for i in range(len(regions_of_interest)):  
         
-        selected_data = four_columns.loc[[regions_of_interest[i][0] * step_size
+        selected_data = df.loc[[regions_of_interest[i][0] * step_size
             ] : [regions_of_interest[i][0] * step_size + window_size], 1:4]
 
         print(f'selected_data are... {selected_data}')

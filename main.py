@@ -1,6 +1,6 @@
 # RS: Main Script
 # Script created  3/25/2024
-# Last revision 5/19/2024
+# Last revision 5/20/2024
 
 import pandas as pd
 import numpy as np
@@ -23,9 +23,9 @@ def main() -> None:
     
         print('csv file returned to main() successfully')
   
-    AccZ_sd: list[float] = calculate_window_sd(df['Shimmer_4DA1_Accel_LN_Z_CAL'][1:], window_size, step_size)
+    AccZ_sd: list[float] = calculate_window_sd(df['AccZ'][1:], window_size, step_size)
     """ Extracts a list of float values from df, 
-        a dictionary, where "Shimmer_4DA1_Accel_LN_Z_CAL" is a key. [1:] starting from the second element
+        a dictionary, where "AccZ" is a key. [1:] starting from the second element
 
     Args:
         df (pd.DataFrame), window size (int), step_size (int)
