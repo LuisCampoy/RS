@@ -28,6 +28,7 @@ def read_csv_file(file_path) -> pd.DataFrame:
             header= None,
             names= ['TimeStamp', 'AccX', 'AccY', 'AccZ'],
             usecols= [0, 1, 2, 3],
+            dtype= {'TimeStamp': object, 'AccX': float, 'AccY': float, 'AccZ': float},
             encoding="utf-8",
             low_memory=False,
         )
