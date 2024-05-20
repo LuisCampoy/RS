@@ -23,15 +23,14 @@ def read_csv_file(file_path) -> pd.DataFrame:
 
         df: pd.DataFrame = pd.read_csv(
             file_path,
-            skiprows=1,
+            skiprows=3,
             sep=",",
-            header=0,
-            usecols= [1, 2, 3, 4],
+            header= None,
+            names= ['TimeStamp', 'AccX', 'AccY', 'AccZ'],
+            usecols= [0, 1, 2, 3],
             encoding="utf-8",
             low_memory=False,
         )
-
-        df = df.drop(index=0)
 
         print(df.head())
         print(df.tail())
