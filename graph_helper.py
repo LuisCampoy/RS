@@ -9,7 +9,7 @@ def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None
     """Create a plot of the Z axis only with the detected Regions of Interest
     
     Args:
-        result: list with the all the regions that have a standad deviation greater or equal to our threshold
+        df: list with the all the regions that have a standad deviation greater or equal to our threshold
         regions_of_interest:
         window_size:
         step_size:
@@ -17,20 +17,29 @@ def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None
 
     Returns:
         None
+        
+    
+    Optional: Improve date formatting on x-axis if 'TimeStamp' is a datetime
+    import matplotlib.dates as mdates
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
+    plt.gcf().autofmt_xdate()  # Rotate date labels for better readability
+
     """
+    
+    plt.figure(figsize=(10, 6))
     plt.plot(
-    df['TimeStamp'][1:],
-    df['AccX'][1:],
+    df['TimeStamp'][0:],
+    df['AccX'][0:],
     label= "AccX",
     )
     plt.plot(
-    df['TimeStamp'][1:],
-    df['AccY'][1:],
+    df['TimeStamp'][0:],
+    df['AccY'][0:],
     label= 'AccY',
     )
     plt.plot(
-    df['TimeStamp'][1:],
-    df['AccZ'][1:],
+    df['TimeStamp'][0:],
+    df['AccZ'][0:],
     label= 'AccZ',
     )
 
@@ -57,3 +66,4 @@ def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None
     plt.grid(which='both')
     plt.legend()
     plt.show()
+    

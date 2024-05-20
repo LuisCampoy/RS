@@ -32,7 +32,9 @@ def read_csv_file(file_path) -> pd.DataFrame:
             encoding="utf-8",
             low_memory=False,
         )
-
+        
+        df['TimeStamp'] = pd.to_datetime(df['TimeStamp'])
+    
         print(df.head())
         print(df.tail())
         print("file read")
@@ -43,4 +45,4 @@ def read_csv_file(file_path) -> pd.DataFrame:
 
         print("An error occurred:", str(e))
 
-    return None
+        return None
