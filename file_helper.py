@@ -23,10 +23,10 @@ def read_csv_file(file_path) -> pd.DataFrame:
 
         df: pd.DataFrame = pd.read_csv(
             file_path,
-            skiprows=3,
+            skiprows=1,
             sep=",",
             header=0,
-            usecols=4,
+            usecols= [1, 2, 3, 4],
             encoding="utf-8",
             low_memory=False,
         )
