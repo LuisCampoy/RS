@@ -20,15 +20,20 @@ def get_region(df, regions_of_interest, window_size, step_size):
         )
 
 
-def get_max_abs_value(df, regions_of_interest, window_size, step_size):
-    """Create a new pd.DataFrafe with the 3 columns (AccX, AccY, AccZ) and region of interest
-    Calculate abs value of each colum and then the max value
-    do this for each column and for each attemp except for the last one
-    Do the same for the last attempt but using only AccY and AccX
+def get_max_abs_value(df, regions_of_interest, window_size, step_size) -> list[float]:
+    """Create a new pd.DataFrafe with the 3 columns (AccX, AccY, AccZ) within each region of interest
+        Calculate abs value of each colum and then the max value of each column
+        Do this for for each failed attemp (all except for the last one)
+        Do the same for the last attempt but using only AccY and AccX
 
     Args:
+        df:
+        regions_of_interest:
+        window_size:
+        step_size
 
     Returns:
+        list[float]
 
     """
 
