@@ -50,11 +50,16 @@ def main() -> None:
     
     print('ROI rows printed successfully...')
 
-    get_plot(df, regions_of_interest, window_size, step_size, file_path)  
+    #get_plot(df, regions_of_interest, window_size, step_size, file_path)  
 
-    sumua = get_max_abs_value(df, regions_of_interest, window_size, step_size)
-
-    print(f'sumua = {sumua}')
+    get_amax_sa(df, regions_of_interest, window_size, step_size)
+    
+   # print(amax_sa)
+    
+    #print('amax_sa printed sucessfully...')
+    
+    
+    get_amax_ua()
 
 if __name__ == "__main__":
     main()
