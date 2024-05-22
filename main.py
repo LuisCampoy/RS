@@ -46,13 +46,13 @@ def main() -> None:
 
     print(f"Number of Failed Attempts = {number_of_failed_attempts}")
 
-    roi_list = get_regions(df, regions_of_interest, window_size, step_size)
+    amax = get_regions(df, regions_of_interest, window_size, step_size)
 
-  
+ 
 
     # get_plot(df, regions_of_interest, window_size, step_size, file_path)
 
-    #get_amax_sa(roi)
+    get_amax_sa(amax)
 
     
     # print('amax_sa printed sucessfully...')

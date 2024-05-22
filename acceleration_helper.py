@@ -4,7 +4,7 @@
 
 import pandas as pd
 
-def get_amax_sa(selected_data):
+def get_amax_sa(amax):
     """Create a new pd.DataFrafe with the 2 columns (AccX, AccY) within the last region of interest (successful attempt)
         Creat start index and end index from...???
         Calculate abs value of each colum and then return the max value from each column
@@ -21,11 +21,14 @@ def get_amax_sa(selected_data):
     """
 
     #raise NotImplementedError("Sorry, get_amax_sa() is not implemented yet...")
-    
-    
-    amax_sa = selected_data.abs().max().max()
 
-    return amax_sa
+   
+        
+    print(f'Amax is {amax}')
+    
+    
+    
+  
 
 
 def get_amax_ua(df, regions_of_interest, window_size, step_size) -> list[float]:

@@ -7,7 +7,7 @@ import pandas as pd
 # calculate maximum absolute value within the ROI in X, Y and Z axis
 def get_regions(df, regions_of_interest, window_size, step_size):
     
-    selected_data_list = [] 
+    selected_data = [] 
     
     #loop through each ROI
     for i in range(len(regions_of_interest)):
@@ -16,7 +16,7 @@ def get_regions(df, regions_of_interest, window_size, step_size):
         end_index = start_index + window_size
 
         # Select rows using iloc and columns using column names
-        selected_data = df.iloc[start_index:end_index][['TimeStamp', 'AccX', 'AccY', 'AccZ']]
+        selected_data = df.iloc[start_index:end_index][['AccX', 'AccY', 'AccZ']]
         
         print(
             'ROI ',
@@ -29,9 +29,16 @@ def get_regions(df, regions_of_interest, window_size, step_size):
         )
     
         print(selected_data)
+        
+        amax = selected_data.max()
+        
+        print(f'Amax is {amax}')
+        
     
     print('selected_data printed sucessfully...')
     print('ROI printed successfully...')
+    
+    return amax
     
     
    
