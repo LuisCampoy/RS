@@ -22,10 +22,10 @@ def get_amax_sa(df, regions_of_interest, window_size, step_size):
 
     #raise NotImplementedError("Sorry, get_amax_sa() is not implemented yet...")
     
-    j=len(regions_of_interest)
+    j=len(regions_of_interest) +1
     
-    start_index = df['TimeStamp'][regions_of_interest[j][0] * step_size]
-    end_index = df['TimeStamp'][regions_of_interest[j][0] * step_size] + window_size
+    start_index = regions_of_interest[j][0] * step_size
+    end_index = start_index + window_size
 
         # Select rows using iloc and columns using column names
     selected_data = df.iloc[start_index:end_index][['AccX', 'AccY']]
