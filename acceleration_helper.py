@@ -4,7 +4,7 @@
 
 import pandas as pd
 
-def get_amax_sa(df, regions_of_interest, window_size, step_size):
+def get_amax_sa(selected_data):
     """Create a new pd.DataFrafe with the 2 columns (AccX, AccY) within the last region of interest (successful attempt)
         Creat start index and end index from...???
         Calculate abs value of each colum and then return the max value from each column
@@ -22,24 +22,10 @@ def get_amax_sa(df, regions_of_interest, window_size, step_size):
 
     #raise NotImplementedError("Sorry, get_amax_sa() is not implemented yet...")
     
-    j=len(regions_of_interest) +1
     
-    start_index = regions_of_interest[j][0] * step_size
-    end_index = start_index + window_size
+    amax_sa = selected_data.abs().max().max()
 
-        # Select rows using iloc and columns using column names
-    selected_data = df.iloc[start_index:end_index][['AccX', 'AccY']]
-        
-        # Display the selected data
-    print(f"Region {j}:")
-    print(selected_data)
-    print()
-
-    print("Selected_Data printed...")
-
-    # amax_sa = selected_data.abs().max().max()
-
-    # return amax_sa
+    return amax_sa
 
 
 def get_amax_ua(df, regions_of_interest, window_size, step_size) -> list[float]:
@@ -59,3 +45,20 @@ def get_amax_ua(df, regions_of_interest, window_size, step_size) -> list[float]:
     """
 
     raise NotImplementedError("Sorry, get_amax_ua() is not implemented yet...")
+
+    selected_data_list = []
+
+    # Loop through each region of interest
+    for j in range(len(regions_of_interest)):
+        start_index = regions_of_interest[j][0] * step_size
+        end_index = start_index + window_size
+
+        # Select rows using iloc and columns using column names
+        selected_data = df.iloc[start_index:end_index][["TimeStamp", "AccX", "AccY"]]
+        selected_data_list.append(selected_data)
+
+    # Concatenate all selected data into a single DataFrame
+    all_selected_data = pd.concat(selected_data_list).reset_index(drop=True)
+
+    # Display the resulting DataFrame
+    print(all_selected_data)
