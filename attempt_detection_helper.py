@@ -2,8 +2,8 @@
 # Script created  3/25/2024
 # Last revision 5/8/2024
 
+import pandas as pd
 import numpy as np
-from pandas import DataFrame
 
 def calculate_window_sd(data, p: int, q: int)-> list[float]:
     """ Create a window to scan the data. The window size is p data points and the window is advancing every q datapoints
@@ -67,9 +67,9 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
             regions_of_interest.append((index, big))
             big = 0
             index = 0
-
+        
     regions_of_interest.append((index, big))
-
+    
     return regions_of_interest
 
 def get_attempts(regions_of_interest: list) ->int:

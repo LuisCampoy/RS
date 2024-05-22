@@ -4,7 +4,6 @@
 
 import pandas as pd
 
-
 def read_csv_file(file_path) -> pd.DataFrame:
     """Read the first four columns (TimeStamp, AccX, AccY, AccZ) from the csv file
         using the read_csv function.

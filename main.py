@@ -1,15 +1,15 @@
 # RS: Main Script
 # Script created  3/25/2024
-# Last revision 5/20/2024
+# Last revision 5/22/2024
 
+from operator import index
 import pandas as pd
-import numpy as np
 
 from file_helper import read_csv_file
 from attempt_detection_helper import *
 from region_helper import *
+from acceleration_helper import *
 from graph_helper import get_plot
-
 
 def main() -> None:
 
@@ -48,17 +48,16 @@ def main() -> None:
 
     get_region(df, regions_of_interest, window_size, step_size)
 
-    print("ROI rows printed successfully...")
+    print("ROI printed successfully...")
 
     # get_plot(df, regions_of_interest, window_size, step_size, file_path)
 
-    amax_sa: list = list(get_amax_sa(df, regions_of_interest, window_size, step_size))
+    get_amax_sa(df, regions_of_interest, window_size, step_size)
 
-    # print(amax_sa)
-
+    
     # print('amax_sa printed sucessfully...')
 
-    get_amax_ua()
+    amax_ua = get_amax_ua()
 
 
 if __name__ == "__main__":
