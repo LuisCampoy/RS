@@ -21,10 +21,10 @@ def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
     # Store data from each reion of interest
     selected_data_list: list = [] 
     # Store data from the maximum acceleration values from each axis and each region
-    amax_x_region: list = []
-    amax_y_region: list = []
-    amax_z_region: list = []
-    
+    x_region: list = []
+    y_region: list = []
+    z_region: list = []
+    regions: list = []
      # Loop through each region of interest (ROI)
     for i, roi in enumerate(regions_of_interest):
         start_index = roi[0] * step_size
@@ -45,11 +45,13 @@ def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
         print(selected_data)'''
         
         # Append and calculate the maximum absolute value of each axis in each region
-        amax_x_region.append(selected_data['AccX'].abs().max())
-        amax_y_region.append(selected_data['AccY'].abs().max())
-        amax_z_region.append(selected_data['AccZ'].abs().max())
-         
-    return selected_data_list, amax_x_region, amax_y_region, amax_z_region
+        x_region.append(selected_data['AccX'])
+        y_region.append(selected_data['AccY'])
+        z_region.append(selected_data['AccZ'])
+        
+        regions = [x_region, y_region, z_region]
+                 
+    return selected_data_list, regions
 
         
 

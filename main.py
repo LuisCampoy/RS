@@ -41,16 +41,25 @@ def main() -> None:
 
     print(f"Number of Failed Attempts = {number_of_failed_attempts}")
 
-    (selected_data_list, amax_x_region, amax_y_region, amax_z_region) = get_regions(df, regions_of_interest, window_size, step_size)
+    selected_data_list, regions = get_regions(df, regions_of_interest, window_size, step_size)
 
     print(selected_data_list)
     print('Data printed successfully')
     
-    print(amax_x_region)
-    print(amax_y_region)
-    print(amax_z_region)
+    print(regions[0])
+    print('X region printed successfully')
     
-    print('regions printed successfully')
+    print(regions[1])
+    print('Y region printed sucessfully')
+    
+    print(regions[2])
+    print('Z region printed successfully')
+    
+   
+     
+    #amax = get_max_accelerations(regions)
+    
+    #print(f'max absolute acceleration in x, y and z are {amax}')
     
     
     
