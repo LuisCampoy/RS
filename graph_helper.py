@@ -17,13 +17,6 @@ def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None
 
     Returns:
         None
-        
-    
-    Optional: Improve date formatting on x-axis if 'TimeStamp' is a datetime
-    import matplotlib.dates as mdates
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-    plt.gcf().autofmt_xdate()  # Rotate date labels for better readability
-
     """
     
     plt.figure(figsize=(10, 6))
