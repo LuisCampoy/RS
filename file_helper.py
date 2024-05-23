@@ -1,6 +1,6 @@
 # Recovery Score Calculations: file_helper Script
 # Script created  3/25/2024
-# Last revision 5/20/2024
+# Last revision 5/23/2024
 
 import pandas as pd
 
@@ -34,14 +34,10 @@ def read_csv_file(file_path) -> pd.DataFrame:
         
         df['TimeStamp'] = pd.to_datetime(df['TimeStamp'])
     
-        print(df.head())
-        print(df.tail())
-        print("file read")
-
         return df
 
     except Exception as e:
 
         print("An error occurred:", str(e))
-
+        
         return None

@@ -1,6 +1,6 @@
 # RS: Main Script
 # Script created  3/25/2024
-# Last revision 5/22/2024
+# Last revision 5/23/2024
 
 from operator import index
 import pandas as pd
@@ -23,36 +23,40 @@ def main() -> None:
 
     if df is not None:
 
-        print("csv file returned to main() successfully")
-
+        print("csv file red successfully.")
+        
+        #print(df.head())   
+       
     AccZ_sd: list[float] = calculate_window_sd(df["AccZ"][1:], window_size, step_size)
-    """ Extracts a list of float values from df, 
-        a dictionary, where "AccZ" is a key. [1:] starting from the second element
-
-    Args:
-        df (pd.DataFrame), window size (int), step_size (int)
-
-    Returns:
-        Pandas DataFrame (pd.DataFrame)
-    """
-
-    regions_of_interest = detect_regions_of_interest_Z(AccZ_sd)
-
+   
+    print('sd_list calculated succesfully')
+    
+    regions_of_interest: list = detect_regions_of_interest_Z(AccZ_sd)
+       
     print(regions_of_interest)
-
+    
     print("Regions of Interest detected successfully...")
 
-    number_of_failed_attempts = get_attempts(regions_of_interest)
+    number_of_failed_attempts: int = get_attempts(regions_of_interest)
 
     print(f"Number of Failed Attempts = {number_of_failed_attempts}")
 
-    amax = get_regions(df, regions_of_interest, window_size, step_size)
+    (selected_data_list, amax_x_region, amax_y_region, amax_z_region) = get_regions(df, regions_of_interest, window_size, step_size)
 
- 
-
+    print(selected_data_list)
+    print('Data printed successfully')
+    
+    print(amax_x_region)
+    print(amax_y_region)
+    print(amax_z_region)
+    
+    print('regions printed successfully')
+    
+    
+    
     # get_plot(df, regions_of_interest, window_size, step_size, file_path)
 
-    get_amax_sa(amax)
+    #get_amax_sa(amax)
 
     
     # print('amax_sa printed sucessfully...')

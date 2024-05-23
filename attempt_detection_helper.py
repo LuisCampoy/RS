@@ -1,39 +1,36 @@
 # Recovery Score Calculations: Identification of Regions of Interest helper
 # Script created  3/25/2024
-# Last revision 5/8/2024
+# Last revision 5/23/2024
 
 import pandas as pd
 import numpy as np
 
-def calculate_window_sd(data, p: int, q: int)-> list[float]:
-    """ Create a window to scan the data. The window size is p data points and the window is advancing every q datapoints
+def calculate_window_sd(data, window_size: int, step_size: int)-> list[float]:
+    """ Create a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints
         function calculates the standard deviation over a specified window size with a specified step size
 
     Args:
         data: extracted column (Shimmer_4DA1_Accel_LN_Z_CAL)
-        p: window size
-        q: number of data points by which the window advances
+        window_size: window size
+        step_size: number of data points by which the window advances
 
     Returns:
-        list
+        list of float values
     
     """
     print('calculating window_sd...')
 
     n = len(data)
     sd_list = []
-    for i in range(0, n - p + 1, q):
-        window = data[i : i + p]
+    for i in range(0, n - window_size + 1, step_size):
+        window = data[i : i + window_size]
         sd = np.std(window)
         sd_list.append(sd)
     
-    print('sd_list ready...')
-
     return sd_list
 
 def detect_regions_of_interest_Z(AccZ_sd) -> list:
-    """ Create a window to scan the data. The window size is p data points and the window is advancing every q datapoints
-        Identify Regions of Interest in the data based on a threshold criterion 
+    """ Identify Regions of Interest in the data based on a threshold criterion 
         applied to the standard deviation values (AccZ_sd)
         It filters out regions where the standard deviation is greater than or equal to twice 
         the threshold value (threshold * 2). These regions are stored in the filtered list along with their indices.
