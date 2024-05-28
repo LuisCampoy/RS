@@ -1,10 +1,29 @@
 # Recovery Score Calculations: Acceleration helper
 # Script created  3/25/2024
-# Last revision 5/22/2024
+# Last revision 5/28/2024
 
 import pandas as pd
 
-def get_amax_sa():
+def get_max_accelerations(regions)->list[float]:
+    """Create a list with the maximum absolute values foe each region of interest and for each column (AccX, AccY, AccZ)
+
+    Args:
+        regions:
+
+    Returns:
+        list [float64]
+
+    """
+    #raise NotImplementedError("Sorry, get_amax_accels is not implemented yet...")
+    amax = []
+    amax_x: float = regions[1].abs().max()
+    amax_y: float = regions[2].abs().max()
+    amax_z: float = regions[3].abs().max()
+    amax = [amax_x, amax_y, amax_z]
+    
+    return amax
+
+def get_amax_sa(amax_x_region, amax_y_region):
     """Create a new pd.DataFrafe with the 2 columns (AccX, AccY) within the last region of interest (successful attempt)
         Creat start index and end index from...???
         Calculate abs value of each colum and then return the max value from each column
@@ -16,7 +35,7 @@ def get_amax_sa():
         step_size:
 
     Returns:
-        list[float]
+        list
 
     """
 
@@ -41,19 +60,4 @@ def get_amax_ua():
 
     raise NotImplementedError("Sorry, get_amax_ua() is not implemented yet...")
 
-    selected_data_list = []
-
-    # Loop through each region of interest
-    for j in range(len(regions_of_interest)):
-        start_index = regions_of_interest[j][0] * step_size
-        end_index = start_index + window_size
-
-        # Select rows using iloc and columns using column names
-        selected_data = df.iloc[start_index:end_index][["TimeStamp", "AccX", "AccY"]]
-        selected_data_list.append(selected_data)
-
-    # Concatenate all selected data into a single DataFrame
-    all_selected_data = pd.concat(selected_data_list).reset_index(drop=True)
-
-    # Display the resulting DataFrame
-    print(all_selected_data)
+    
