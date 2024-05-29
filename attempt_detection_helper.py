@@ -43,7 +43,7 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
     """
 
     filtered = list()
-    threshold: float = 0.5
+    threshold: float = 0.75 #seems like a sweet spot
 
     for i in range(len(AccZ_sd)):
         if AccZ_sd[i] >= threshold * 2:
