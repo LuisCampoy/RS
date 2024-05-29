@@ -1,63 +1,119 @@
 # Recovery Score Calculations: Acceleration helper
-# Script created  3/25/2024
-# Last revision 5/28/2024
+# Script created 3/25/2024
+# Last revision 5/29/2024
 
+from numpy import sqrt
 import pandas as pd
 
-def get_max_accelerations(regions)->list[float]:
-    """Create a list with the maximum absolute values foe each region of interest and for each column (AccX, AccY, AccZ)
+def get_max_accelerations_x(selected_data_list) -> list[float]:
+    """ Create a list with the maximum absolute values for each attempt 
+        for 'AccX'
 
     Args:
-        regions:
+        selected_data_list: list with a list of dataframes. 
+        One per event with three columns (AccX, AccY and AccZ)
 
     Returns:
         list [float64]
 
     """
-    #raise NotImplementedError("Sorry, get_amax_accels is not implemented yet...")
-    amax = []
-    amax_x: float = regions[1].abs().max()
-    amax_y: float = regions[2].abs().max()
-    amax_z: float = regions[3].abs().max()
-    amax = [amax_x, amax_y, amax_z]
+   
+    amax_x_list = []
+        
+    for i in range (len (selected_data_list)):
+        amax_x = selected_data_list[i]['AccX'].abs().max()
+        amax_x_list.append(amax_x)
     
-    return amax
+    return amax_x_list
 
-def get_amax_sa(amax_x_region, amax_y_region):
-    """Create a new pd.DataFrafe with the 2 columns (AccX, AccY) within the last region of interest (successful attempt)
-        Creat start index and end index from...???
-        Calculate abs value of each colum and then return the max value from each column
+def get_max_accelerations_y(selected_data_list) -> list[float]:
+    """ Create a list with the maximum absolute values for each attempt 
+        for 'AccY'
 
     Args:
-        df:
-        regions_of_interest:
-        window_size:
-        step_size:
+        selected_data_list: list with a list of dataframes. 
+        One per event with three columns (AccX, AccY and AccZ)
 
     Returns:
-        list
+        list [float64]
 
     """
-
-    raise NotImplementedError("Sorry, get_amax_sa() is not implemented yet...")
-  
+   
+    amax_y_list = []
+        
+    for i in range (len (selected_data_list)):
+        amax_y = selected_data_list[i]['AccY'].abs().max()
+        amax_y_list.append(amax_y)
     
-def get_amax_ua():
-    """Create a new pd.DataFrafe with the 3 columns (AccX, AccY, AccZ) within each region of interest
-        Calculate abs value of each colum and then the max value of each column
-        Do this for for each failed attemp (all except for the last one)
+    return amax_y_list
+        
+def get_max_accelerations_z(selected_data_list) -> list[float]:
+    """ Create a list with the maximum absolute values for each attempt 
+        for 'AccZ'
 
     Args:
-        df:
-        regions_of_interest:
-        window_size:
-        step_size
+        selected_data_list: list with a list of dataframes. 
+        One per event with three columns (AccX, AccY and AccZ)
 
     Returns:
-        list[float]
+        list [float64]
 
     """
-
-    raise NotImplementedError("Sorry, get_amax_ua() is not implemented yet...")
-
+   
+    amax_z_list = []
+        
+    for i in range (len (selected_data_list)):
+        amax_z = selected_data_list[i]['AccZ'].abs().max()
+        amax_z_list.append(amax_z)
     
+    return amax_z_list
+
+def get_sa(amax_x_list, amax_y_list, amax_z_list) -> float:
+    """ Calculate the squared root (SQRT) of the sum of the squares 
+        of each max acceleration on each axis (AccX, AccY, AccZ)
+        for the successful attempt
+
+    Args:
+        amax_x_list: list with the max absolute accelerations on AccX per event.
+                    last argument of this list is the succesful attempt
+        amax_y_list: list with the max absolute accelerations on AccY per event.
+                    last argument of this list is the succesful attempt
+        amax_z_list: list with the max absolute accelerations on AccZ per event.
+                    last argument of this list is the succesful attempt
+        
+    Returns:
+        float
+
+    """
+    
+    i = len(amax_z_list)-1
+    sa = sqrt(amax_x_list[i] ** 2  + amax_y_list[i] ** 2 + amax_z_list[i] ** 2)
+    
+    return sa     
+    
+def get_sa_2axes(amax_x_list, amax_y_list) -> float:
+    """ Calculate the squared root (SQRT) of the sum of the squares 
+        of each max acceleration on the X and Y axes only.
+
+    Args:
+        amax_x_list: list with the max absolute accelerations on AccX per event.
+                    last argument of this list is the succesful attempt
+        amax_y_list: list with the max absolute accelerations on AccY per event.
+                    last argument of this list is the succesful attempt
+         
+    Returns:
+        float
+
+    """
+       
+    i = len(amax_x_list)-1
+    sa_2axes = sqrt(amax_x_list[i] ** 2  + amax_y_list[i] ** 2)
+    
+    return sa_2axes
+
+def get_sumua(amax_x_list, amax_y_list, amax_z_list):
+
+    raise NotImplementedError('function not implemented yet...')
+
+    for i in range (len (amax_z_list-2)):
+        

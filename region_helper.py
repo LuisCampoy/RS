@@ -17,14 +17,10 @@ def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
     Returns:
         Tuple: Containing a list of DataFrames, each DataFrame contains a specific region of interest, 
                and three lists with maximum absolute values of AccX, AccY, and AccZ for each region.
+               Selected_Data_list is a list with a dataframe with AccX, AccY and AccZ per event
     '''
     # Store data from each reion of interest
     selected_data_list: list = [] 
-    # Store data from the maximum acceleration values from each axis and each region
-    x_region: list = []
-    y_region: list = []
-    z_region: list = []
-    regions: list = []
     
     # Loop through each region of interest (ROI)
     for i, roi in enumerate(regions_of_interest):
@@ -37,24 +33,8 @@ def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
             
         # Select rows using iloc and columns using column names
         selected_data = df.iloc[start_index:end_index][['AccX', 'AccY', 'AccZ']]
+    
         selected_data_list.append(selected_data)
            
-        # Append and calculate the maximum absolute value of each axis in each region
-        x_region.append(selected_data['AccX'])
-        y_region.append(selected_data['AccY'])
-        z_region.append(selected_data['AccZ'])
-        
-        regions = [x_region, y_region, z_region]
-                 
-    return selected_data_list, regions
+    return selected_data, selected_data_list
 
-        
-
-    
-   
-    
-    
-
-        
-              
-      

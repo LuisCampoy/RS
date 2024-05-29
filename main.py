@@ -1,6 +1,6 @@
 # RS: Main Script
-# Script created  3/25/2024
-# Last revision 5/23/2024
+# Script created 3/25/2024
+# Last revision 5/29/2024
 
 from operator import index
 import pandas as pd
@@ -17,61 +17,49 @@ def main() -> None:
     step_size: int = 2000
 
     # file_path: str = input("Enter file name: ")
-    file_path: str = "344717_RED.csv"
+    file_path: str = "366647.csv"
 
     df: pd.DataFrame = read_csv_file(file_path)
 
     if df is not None:
-
         print("csv file red successfully.")
-        
         #print(df.head())   
        
     AccZ_sd: list[float] = calculate_window_sd(df["AccZ"][1:], window_size, step_size)
-   
     print('sd_list calculated succesfully')
     
-    regions_of_interest: list = detect_regions_of_interest_Z(AccZ_sd)
-       
+    regions_of_interest: list = detect_regions_of_interest_Z(AccZ_sd)   
     print(regions_of_interest)
-    
     print("Regions of Interest detected successfully...")
 
     number_of_failed_attempts: int = get_attempts(regions_of_interest)
-
     print(f"Number of Failed Attempts = {number_of_failed_attempts}")
 
-    selected_data_list, regions = get_regions(df, regions_of_interest, window_size, step_size)
-
-    print(selected_data_list)
+    selected_data, selected_data_list = get_regions(df, regions_of_interest, window_size, step_size)
+    print(selected_data)
     print('Data printed successfully')
+    print(selected_data_list)
+    print('Selected Data list')
+       
+    amax_x_list: list = get_max_accelerations_x(selected_data_list)
+    print(f'amax_x_list is {amax_x_list}')
+        
+    amax_y_list: list = get_max_accelerations_y(selected_data_list)
+    print(f'amax_y_list is {amax_y_list}')
     
-    print(regions[0])
-    print('X region printed successfully')
+    amax_z_list: list = get_max_accelerations_z(selected_data_list)
+    print(f'amax_z_list is {amax_z_list}')
     
-    print(regions[1])
-    print('Y region printed sucessfully')
-    
-    print(regions[2])
-    print('Z region printed successfully')
-    
-   
-     
-    #amax = get_max_accelerations(regions)
-    
-    #print(f'max absolute acceleration in x, y and z are {amax}')
-    
-    
-    
-    # get_plot(df, regions_of_interest, window_size, step_size, file_path)
+    sa: float = get_sa(amax_x_list, amax_y_list, amax_z_list)
+    print(f'sa = {sa}')
 
-    #get_amax_sa(amax)
-
+    sa_2axes: float = get_sa_2axes(amax_x_list, amax_y_list)
+    print(f'sa = {sa_2axes}')
     
-    # print('amax_sa printed sucessfully...')
-
-    #amax_ua = get_amax_ua()
-
+    sumua: float = get_sumua(amax_x_list, amax_y_list, amax_z_list)
+    
+    
+    #get_plot(df, regions_of_interest, window_size, step_size, file_path)
 
 if __name__ == "__main__":
     main()
