@@ -93,7 +93,7 @@ def get_sa(amax_x_list, amax_y_list, amax_z_list) -> float:
     
 def get_sa_2axes(amax_x_list, amax_y_list) -> float:
     """ Calculate the squared root (SQRT) of the sum of the squares 
-        of each max acceleration on the X and Y axes only.
+        of each max acceleration on the X and Y axes only for the successful attempt.
 
     Args:
         amax_x_list: list with the max absolute accelerations on AccX per event.
@@ -114,7 +114,7 @@ def get_sa_2axes(amax_x_list, amax_y_list) -> float:
 def get_sumua(amax_x_list, amax_y_list, amax_z_list):
     """ Calculate the squared root (SQRT) of the sum of the squares 
         of each max acceleration on each axis (AccX, AccY, AccZ)
-        for the successful attempt
+        for each of the the unsuccessful attempts
 
     Args:
         amax_x_list: list with the max absolute accelerations on AccX per event.
