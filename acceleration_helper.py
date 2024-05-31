@@ -6,8 +6,8 @@ from numpy import sqrt
 import pandas as pd
 
 def get_max_accelerations_x(selected_data_list) -> list[float]:
-    """ Create a list with the maximum absolute values for each attempt 
-        for 'AccX'
+    """ Create a list with the maximum absolute values 
+        for each attempt   
 
     Args:
         selected_data_list: list with a list of dataframes. 
@@ -15,7 +15,6 @@ def get_max_accelerations_x(selected_data_list) -> list[float]:
 
     Returns:
         list [float64]
-
     """
    
     amax_x_list = []
@@ -27,16 +26,15 @@ def get_max_accelerations_x(selected_data_list) -> list[float]:
     return amax_x_list
 
 def get_max_accelerations_y(selected_data_list) -> list[float]:
-    """ Create a list with the maximum absolute values for each attempt 
-        for 'AccY'
-
+    """ Create a list with the maximum absolute values 
+        for each attempt 
+        
     Args:
         selected_data_list: list with a list of dataframes. 
         One per event with three columns (AccX, AccY and AccZ)
 
     Returns:
         list [float64]
-
     """
    
     amax_y_list = []
@@ -128,8 +126,7 @@ def get_sumua(amax_x_list, amax_y_list, amax_z_list):
         float
 
     """
-    #raise NotImplementedError('function not implemented yet...')
-
+    
     ua_list = []
     
     for i in range (len (amax_z_list)-1):

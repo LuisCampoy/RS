@@ -1,29 +1,30 @@
 # Recovery Score Calculations: Identification of Regions of Interest helper
 # Script created  3/25/2024
-# Last revision 5/23/2024
+# Last revision 5/31/2024
 
 import pandas as pd
 import numpy as np
 
-def calculate_window_sd(data, window_size: int, step_size: int)-> list[float]:
+def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[float]:
     """ Create a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints
         function calculates the standard deviation over a specified window size with a specified step size
 
     Args:
-        data: extracted column (Shimmer_4DA1_Accel_LN_Z_CAL)
+        filtered_df: extracted column (Shimmer_4DA1_Accel_LN_Z_CAL)
+                     with initial filtered values >= target value
         window_size: window size
         step_size: number of data points by which the window advances
 
     Returns:
         list of float values
-    
     """
+    
     print('calculating window_sd...')
 
-    n = len(data)
+    n = len(filtered_df)
     sd_list = []
     for i in range(0, n - window_size + 1, step_size):
-        window = data[i : i + window_size]
+        window = filtered_df[i : i + window_size]
         sd = np.std(window)
         sd_list.append(sd)
     
@@ -46,7 +47,7 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
     threshold: float = 0.75 #seems like a sweet spot
 
     for i in range(len(AccZ_sd)):
-        if AccZ_sd[i] >= threshold * 2:
+        if AccZ_sd[i] > threshold *2:
             filtered.append((i, AccZ_sd[i]))
 
     regions_of_interest = list()
