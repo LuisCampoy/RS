@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[float]:
-    """ Create a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints
+    ''' Create a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints
         function calculates the standard deviation over a specified window size with a specified step size
 
     Args:
@@ -17,7 +17,7 @@ def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[fl
 
     Returns:
         list of float values
-    """
+    '''
     
     print('calculating window_sd...')
 
@@ -31,7 +31,7 @@ def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[fl
     return sd_list
 
 def detect_regions_of_interest_Z(AccZ_sd) -> list:
-    """ Identify Regions of Interest in the data based on a threshold criterion 
+    ''' Identify Regions of Interest in the data based on a threshold criterion 
         applied to the standard deviation values (AccZ_sd)
         It filters out regions where the standard deviation is greater than or equal to twice 
         the threshold value (threshold * 2). These regions are stored in the filtered list along with their indices.
@@ -41,7 +41,7 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
         
     Returns:
         list with the regions of interest
-    """
+    '''
 
     filtered = list()
     threshold: float = 0.75 #seems like a sweet spot
@@ -71,7 +71,7 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
     return regions_of_interest
 
 def get_attempts(regions_of_interest: list) ->int:
-    """ Count the number of identified regions of interest. Since the last region will always be
+    ''' Count the number of identified regions of interest. Since the last region will always be
         the successful attempt, it substracts 1
 
     Args:
@@ -79,7 +79,7 @@ def get_attempts(regions_of_interest: list) ->int:
 
     Returns:
         int with Number of failed attempts
-    """
+    '''
 
     attempts = len(regions_of_interest) - 1
 

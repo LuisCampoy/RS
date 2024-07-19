@@ -1,6 +1,6 @@
 # Recovery Score Calculations: save_data_helper Script
 # Script created  5/30/2024
-# Last revision 5/31/2024
+# Last revision 6/26/2024
 
 import os
 import pandas as pd
@@ -29,6 +29,14 @@ def rename(file_path) -> str:
 
 def save_data(file_path_to_save, data_to_save, start_time)-> None:
     
-    tempname: str =  f'{file_path_to_save}_{start_time}.csv'
-    #print(f'tempname is: {tempname}')
-    data_to_save.to_csv(f'{tempname}', mode = 'a', index = False, header = True)     
+    x: str = input('do you want to save the file? (y/n) ')
+    
+    if x == 'y':
+        
+        tempname: str =  f'{file_path_to_save}_{start_time}.csv'
+        #print(f'tempname is: {tempname}')
+        data_to_save.to_csv(f'{tempname}', mode = 'a', index = False, header = True)
+        print('data file saved')
+        
+    else:
+        print('program terminated, good bye')

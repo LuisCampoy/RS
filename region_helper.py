@@ -1,11 +1,11 @@
 # Recovery Score Calculations: Calculation helper
 # Script created  3/25/2024
-# Last revision 5/23/2024
+# Last revision 7/12/2024
 
 import pandas as pd
 
 # calculate maximum absolute value within the ROI in X, Y and Z axis
-def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
+def get_regions(filtered_df, regions_of_interest, window_size, step_size)-> tuple:
     '''Provide len(regions_of_interest) DataFrames with a selected regions of interest
     
     Args:
@@ -28,11 +28,11 @@ def get_regions(df, regions_of_interest, window_size, step_size)-> tuple:
         end_index = start_index + window_size
         
         # Ensure the end index does not exceed the dataframe length
-        if end_index > len(df):
-            end_index = len(df)
+        if end_index > len(filtered_df):
+            end_index = len(filtered_df)
             
         # Select rows using iloc and columns using column names
-        selected_data = df.iloc[start_index:end_index][['AccX', 'AccY', 'AccZ']]
+        selected_data = filtered_df.iloc[start_index:end_index][['AccX', 'AccY', 'AccZ']]
     
         selected_data_list.append(selected_data)
            

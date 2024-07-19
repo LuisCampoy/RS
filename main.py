@@ -1,6 +1,6 @@
 # RS: Main Script
 # Script created 3/25/2024
-# Last revision 5/31/2024
+# Last revision 7/17/2024
 
 import pandas as pd
 from datetime import datetime
@@ -21,12 +21,12 @@ def main() -> None:
     window_size: int = 10000
     step_size: int = 2000
 
-    file_path: str = input("Enter file name: ")
+    file_path: str = input('Enter file name: ')
        
     df: pd.DataFrame = read_csv_file(file_path)
 
     if df is not None:
-        print("csv file read successfully.")
+        print('csv file read successfully.')
         
     else:
         print('Failed to load DataFrame')
@@ -37,22 +37,23 @@ def main() -> None:
 
     AccZ_sd: list[float] = calculate_window_sd(filtered_df["AccZ"][1:], window_size, step_size)
     print('sd_list calculated succesfully')
+    #print(f'Accz_sd is {AccZ_sd}')
     
-    regions_of_interest: list = detect_regions_of_interest_Z(AccZ_sd)   
-    #print(regions_of_interest)
-    print("Regions of Interest detected successfully")
-
+    regions_of_interest: list[float] = detect_regions_of_interest_Z(AccZ_sd)   
+    print('Regions of Interest detected successfully')
+    print(f'Regions of interest {regions_of_interest}')
+   
     number_of_failed_attempts: int = get_attempts(regions_of_interest)
-    #print(f"Number of Failed Attempts = {number_of_failed_attempts}")
+    print(f'Number of Failed Attempts = {number_of_failed_attempts}')
 
     selected_data, selected_data_list = get_regions(filtered_df, regions_of_interest, window_size, step_size)
-    #print(selected_data)
-    #print('Data printed successfully')
-    #print(selected_data_list)
-    #print('Selected Data list')
+    print(selected_data)
+    print('Data printed successfully')
+    print(selected_data_list)
+    print('Selected Data list')
        
     amax_x_list: list = get_max_accelerations_x(selected_data_list)
-    #print(f'amax_x_list is {amax_x_list}')
+    print(f'amax_x_list is {amax_x_list}')
         
     amax_y_list: list = get_max_accelerations_y(selected_data_list)
     #print(f'amax_y_list is {amax_y_list}')
@@ -77,11 +78,10 @@ def main() -> None:
     file_path_to_save: str = rename(file_path)
     #print(f'new name for the file is: {file_path_to_save}')
     
-    save_data(file_path_to_save, data_to_save, start_time)
-    print('data file saved')
-    
     #get_plot(df, regions_of_interest, window_size, step_size, file_path)
-    #get_plot(filtered_df, regions_of_interest, window_size, step_size, file_path)
+    get_plot(filtered_df, regions_of_interest, window_size, step_size, file_path)
+    
+    save_data(file_path_to_save, data_to_save, start_time)
     
     if number_of_failed_attempts >= 1:
         
