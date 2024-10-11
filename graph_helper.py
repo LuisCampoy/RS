@@ -1,12 +1,12 @@
 # Recovery Score Calculations: Graph_Helper Script
 # Script created  3/25/2024
-# Last revision 5/20/2024
+# Last revision 10/9/2024
 
 from types import NoneType
 import matplotlib.pyplot as plt
 
 def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None:
-    """Create a plot of the Z axis only with the detected Regions of Interest
+    '''Creates a plot of the Z axis only with the detected Regions of Interest
     
     Args:
         df: list with the all the regions that have a standad deviation greater or equal to our threshold
@@ -17,7 +17,7 @@ def get_plot(df, regions_of_interest, window_size, step_size, file_path) -> None
 
     Returns:
         None
-    """
+    '''
     
     plt.figure(figsize=(10, 6))
     plt.plot(

@@ -1,13 +1,12 @@
 # Recovery Score Calculations: Identification of Regions of Interest helper
 # Script created  3/25/2024
-# Last revision 5/31/2024
+# Last revision 10/9/2024
 
-import pandas as pd
 import numpy as np
 
-def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[float]:
-    ''' Create a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints
-        function calculates the standard deviation over a specified window size with a specified step size
+def calculate_window_sd(df, window_size, step_size)-> list:
+    ''' Creates a window to scan the data. The window size is 'window_size' data points and the window is advancing every 'step_size' datapoints.
+        Function calculates the standard deviation (SD) over a specified window size with a specified step size
 
     Args:
         filtered_df: extracted column (Shimmer_4DA1_Accel_LN_Z_CAL)
@@ -21,20 +20,20 @@ def calculate_window_sd(filtered_df, window_size: int, step_size: int)-> list[fl
     
     print('calculating window_sd...')
 
-    n = len(filtered_df)
-    sd_list = []
+    n: int = len(df)
+    sd_list: list = []
     for i in range(0, n - window_size + 1, step_size):
-        window = filtered_df[i : i + window_size]
+        window = df[i : i + window_size]
         sd = np.std(window)
         sd_list.append(sd)
     
     return sd_list
 
-def detect_regions_of_interest_Z(AccZ_sd) -> list:
-    ''' Identify Regions of Interest in the data based on a threshold criterion 
+def detect_regions_of_interest_Z(AccZ_sd, threshold) -> list:
+    ''' Identifies Regions of Interest in the data based on a threshold criterion 
         applied to the standard deviation values (AccZ_sd)
         It filters out regions where the standard deviation is greater than or equal to twice 
-        the threshold value (threshold * 2). These regions are stored in the filtered list along with their indices.
+        the threshold value (threshold * 2). These regions are stored in the filtered list along with their indexes.
 
     Args:
         AccZ_sd: list with the all the regions that have a standad deviation greater or equal to twice the threshold
@@ -44,10 +43,9 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
     '''
 
     filtered = list()
-    threshold: float = 0.75 #seems like a sweet spot
-
+    
     for i in range(len(AccZ_sd)):
-        if AccZ_sd[i] > threshold *2:
+        if AccZ_sd[i] > threshold:
             filtered.append((i, AccZ_sd[i]))
 
     regions_of_interest = list()
@@ -71,16 +69,16 @@ def detect_regions_of_interest_Z(AccZ_sd) -> list:
     return regions_of_interest
 
 def get_attempts(regions_of_interest: list) ->int:
-    ''' Count the number of identified regions of interest. Since the last region will always be
-        the successful attempt, it substracts 1
+    ''' Counts the number of identified regions of interest. Since the last region will always be
+        the successful attempt, it substracts 1 to the final count
 
     Args:
-        regions_of_interest: list with the all the regions that have a standad deviation > our threshold
+        regions_of_interest: list with the all the regions that have a standad deviation > set threshold
 
     Returns:
-        int with Number of failed attempts
+        int with Number of failed Attempts
     '''
 
-    attempts = len(regions_of_interest) - 1
+    attempts: int = len(regions_of_interest) - 1
 
     return attempts
